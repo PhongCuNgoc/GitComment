@@ -1,0 +1,733 @@
+﻿<!DOCTYPE HTML>
+<!-- saved from url=(0094)https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/Handlers.cs -->
+<!DOCTYPE html PUBLIC "" ""><HTML lang="en"><HEAD prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#"><META 
+content="IE=11.0000" http-equiv="X-UA-Compatible">
+     
+<META charset="utf-8">     <LINK href="gh_files/frameworks-3c1694fab1568340f2e75b26efa1f55d97c5153364a7357e9e1104c718ff1a2f.css" 
+rel="stylesheet" media="all" crossorigin="anonymous">     <LINK href="gh_files/github-3e95d73eb454e0099947df00d91ab0dbfc6b10be69dd5daf5de7aeb676580d20.css" 
+rel="stylesheet" media="all" crossorigin="anonymous">             <LINK href="gh_files/site-c4b4365da282e51c06e107368db8502a2ecf82e64094d29d791b797372212de2.css" 
+rel="stylesheet" media="all" crossorigin="anonymous">         <LINK href="https://assets-cdn.github.com/assets/frameworks-851de55546d87ad786f3efef3b5634f8f8a40d67fa6d44f854d9e99767e9c9a2.js" 
+rel="preload" as="script">         <LINK href="https://assets-cdn.github.com/assets/github-9a6de3c5d3dd93cd9d6638a6d1bcc27eb7cbf9afdd082771ea900f9996597a24.js" 
+rel="preload" as="script">     
+<META http-equiv="X-UA-Compatible" content="IE=edge">     
+<META http-equiv="Content-Language" content="en">     
+<META name="viewport" content="width=1020">             
+<TITLE>dapper-dot-net/Handlers.cs at master · StackExchange/dapper-dot-net · 
+GitHub</TITLE>     <LINK title="GitHub" href="/opensearch.xml" rel="search" 
+type="application/opensearchdescription+xml">     <LINK title="GitHub" href="https://github.com/fluidicon.png" 
+rel="fluid-icon">     <LINK href="/apple-touch-icon.png" rel="apple-touch-icon"> 
+    <LINK href="/apple-touch-icon-57x57.png" rel="apple-touch-icon" sizes="57x57"> 
+    <LINK href="/apple-touch-icon-60x60.png" rel="apple-touch-icon" sizes="60x60"> 
+    <LINK href="/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"> 
+    <LINK href="/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76"> 
+    <LINK href="/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"> 
+    <LINK href="/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"> 
+    <LINK href="/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144"> 
+    <LINK href="/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"> 
+    <LINK href="/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"> 
+    
+<META content="1401488693436528" property="fb:app_id">       
+<META name="twitter:image:src" content="https://avatars0.githubusercontent.com/u/1393171?v=3&amp;s=400">
+<META name="twitter:site" content="@github">
+<META name="twitter:card" content="summary">
+<META name="twitter:title" content="StackExchange/dapper-dot-net">
+<META name="twitter:description" content="dapper-dot-net - Dapper - a simple object mapper for .Net"> 
+      
+<META content="https://avatars0.githubusercontent.com/u/1393171?v=3&amp;s=400" 
+property="og:image">
+<META content="GitHub" property="og:site_name">
+<META content="object" property="og:type">
+<META content="StackExchange/dapper-dot-net" property="og:title">
+<META content="https://github.com/StackExchange/dapper-dot-net" property="og:url">
+<META content="dapper-dot-net - Dapper - a simple object mapper for .Net" 
+property="og:description">       
+<META name="browser-stats-url" content="https://api.github.com/_private/browser/stats"> 
+    
+<META name="browser-errors-url" content="https://api.github.com/_private/browser/errors"> 
+    <LINK href="https://assets-cdn.github.com/" rel="assets">         
+<META name="pjax-timeout" content="1000">         
+<META name="msapplication-TileImage" content="/windows-tile.png">     
+<META name="msapplication-TileColor" content="#ffffff">     
+<META name="selected-link" data-pjax-transient="" value="repo_source">     
+<META name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU"> 
+<META name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA"> 
+    
+<META name="google-analytics" content="UA-3769691-2"> 
+<META name="octolytics-host" content="collector.githubapp.com">
+<META name="octolytics-app-id" content="github">
+<META name="octolytics-dimension-request_id" content="CA4FCB3B:8523:8034C4F:5739507D"> 
+<META name="analytics-location" content="/<user-name>/<repo-name>/blob/show" 
+data-pjax-transient="true">   
+<META name="dimension1" class="js-ga-set" content="Logged Out">         
+<META name="hostname" content="github.com">     
+<META name="user-login" content="">         
+<META name="expected-hostname" content="github.com">       
+<META name="js-proxy-site-detection-payload" content="NjdmZDVjZmYzY2IxYTEyYjc4NzFlNzU1NGNkY2NmMWViODBkMWQzZDFiMDE5ODAxYjc1ZjY1OGJjMDM4ZDA2Ynx7InJlbW90ZV9hZGRyZXNzIjoiMjAyLjc5LjIwMy41OSIsInJlcXVlc3RfaWQiOiJDQTRGQ0IzQjo4NTIzOjgwMzRDNEY6NTczOTUwN0QiLCJ0aW1lc3RhbXAiOjE0NjMzNzM5NTB9"> 
+      <LINK href="https://assets-cdn.github.com/pinned-octocat.svg" rel="mask-icon" 
+color="#4078c0">       <LINK href="https://assets-cdn.github.com/favicon.ico" 
+rel="icon" type="image/x-icon">     
+<META name="form-nonce" content="26dfc931f6ebb8b6320f407b0dbe2e548e82d933">     
+<META http-equiv="x-pjax-version" content="a4cb11b734331d95088899b1377fb05e">    
+         
+<META name="description" content="dapper-dot-net - Dapper - a simple object mapper for .Net"> 
+  
+<META name="go-import" content="github.com/StackExchange/dapper-dot-net git https://github.com/StackExchange/dapper-dot-net.git"> 
+  
+<META name="octolytics-dimension-user_id" content="1393171">
+<META name="octolytics-dimension-user_login" content="StackExchange">
+<META name="octolytics-dimension-repository_id" content="1613345">
+<META name="octolytics-dimension-repository_nwo" content="StackExchange/dapper-dot-net">
+<META name="octolytics-dimension-repository_public" content="true">
+<META name="octolytics-dimension-repository_is_fork" content="false">
+<META name="octolytics-dimension-repository_network_root_id" content="1613345">
+<META name="octolytics-dimension-repository_network_root_nwo" content="StackExchange/dapper-dot-net"> 
+  <LINK title="Recent Commits to dapper-dot-net:master" href="https://github.com/StackExchange/dapper-dot-net/commits/master.atom" 
+rel="alternate" type="application/atom+xml">       <LINK href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/Handlers.cs" 
+rel="canonical" data-pjax-transient="">   
+<META name="GENERATOR" content="MSHTML 11.00.9600.18231"></HEAD>   
+<BODY class="logged-out   env-production windows vis-public page-blob">
+<DIV class="pjax-loader-bar" id="js-pjax-loader-bar"></DIV><A tabindex="1" 
+class="accessibility-aid js-skip-to-content" href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/Handlers.cs#start-of-content">Skip 
+to content</A>                       <HEADER class="site-header js-details-container" 
+role="banner">
+<DIV class="container-responsive"><A class="header-logo-invertocat" aria-label="Homepage" 
+href="https://github.com/" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-mark-github" 
+aria-hidden="true" viewBox="0 0 16 16" width="32" height="32" 
+version="1.1"><path d="M 8 0 C 3.58 0 0 3.58 0 8 c 0 3.54 2.29 6.53 5.47 7.59 c 0.4 0.07 0.55 -0.17 0.55 -0.38 c 0 -0.19 -0.01 -0.82 -0.01 -1.49 c -2.01 0.37 -2.53 -0.49 -2.69 -0.94 c -0.09 -0.23 -0.48 -0.94 -0.82 -1.13 c -0.28 -0.15 -0.68 -0.52 -0.01 -0.53 c 0.63 -0.01 1.08 0.58 1.23 0.82 c 0.72 1.21 1.87 0.87 2.33 0.66 c 0.07 -0.52 0.28 -0.87 0.51 -1.07 c -1.78 -0.2 -3.64 -0.89 -3.64 -3.95 c 0 -0.87 0.31 -1.59 0.82 -2.15 c -0.08 -0.2 -0.36 -1.02 0.08 -2.12 c 0 0 0.67 -0.21 2.2 0.82 c 0.64 -0.18 1.32 -0.27 2 -0.27 c 0.68 0 1.36 0.09 2 0.27 c 1.53 -1.04 2.2 -0.82 2.2 -0.82 c 0.44 1.1 0.16 1.92 0.08 2.12 c 0.51 0.56 0.82 1.27 0.82 2.15 c 0 3.07 -1.87 3.75 -3.65 3.95 c 0.29 0.25 0.54 0.73 0.54 1.48 c 0 1.07 -0.01 1.93 -0.01 2.2 c 0 0.21 0.15 0.46 0.55 0.38 C 13.71 14.53 16 11.53 16 8 C 16 3.58 12.42 0 8 0 Z" 
+/></svg>     </A>     <BUTTON class="btn-link right site-header-toggle js-details-target" 
+aria-label="Toggle navigation" type="button"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-three-bars" aria-hidden="true" viewBox="0 0 12 16" 
+width="18" height="24" version="1.1"><path d="M 11.41 9 H 0.59 c -0.59 0 -0.59 -0.41 -0.59 -1 s 0 -1 0.59 -1 h 10.81 c 0.59 0 0.59 0.41 0.59 1 s 0 1 -0.59 1 Z m 0 -4 H 0.59 c -0.59 0 -0.59 -0.41 -0.59 -1 s 0 -1 0.59 -1 h 10.81 c 0.59 0 0.59 0.41 0.59 1 s 0 1 -0.59 1 Z M 0.59 11 h 10.81 c 0.59 0 0.59 0.41 0.59 1 s 0 1 -0.59 1 H 0.59 c -0.59 0 -0.59 -0.41 -0.59 -1 s 0 -1 0.59 -1 Z" 
+/></svg>     </BUTTON>     
+<DIV class="site-header-menu"><NAV 
+class="site-header-nav site-header-nav-main"><A class="js-selected-navigation-item nav-item nav-item-personal" 
+href="https://github.com/personal" data-ga-click="Header, click, Nav menu - item:personal" 
+data-selected-links="/personal /personal">          Personal </A><A class="js-selected-navigation-item nav-item nav-item-opensource" 
+href="https://github.com/open-source" data-ga-click="Header, click, Nav menu - item:opensource" 
+data-selected-links="/open-source /open-source">          Open source </A><A 
+class="js-selected-navigation-item nav-item nav-item-business" href="https://github.com/business" 
+data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/features /business/customers /business"> 
+         Business </A><A class="js-selected-navigation-item nav-item nav-item-explore" 
+href="https://github.com/explore" data-ga-click="Header, click, Nav menu - item:explore" 
+data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /explore"> 
+         Explore </A></NAV>
+<DIV class="site-header-actions"><A class="btn btn-primary site-header-actions-btn" 
+href="https://github.com/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign 
+up</A>           <A class="btn site-header-actions-btn mr-2" href="https://github.com/login?return_to=%2FStackExchange%2Fdapper-dot-net%2Fblob%2Fmaster%2FDapper.EntityFramework%2FHandlers.cs" 
+data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</A>   
+    </DIV><NAV class="site-header-nav site-header-nav-secondary"><A class="nav-item" 
+href="https://github.com/pricing">Pricing</A>           <A class="nav-item" 
+href="https://github.com/blog">Blog</A>           <A class="nav-item" href="https://help.github.com/">Support</A> 
+          <A class="nav-item header-search-link" href="https://github.com/search">Search 
+GitHub</A>               
+<DIV class="header-search scoped-search site-scoped-search js-site-search" role="search"><!-- </textarea> --><!-- '"` -->
+<FORM class="js-site-search-form" action="/StackExchange/dapper-dot-net/search" 
+method="get" accept-charset="UTF-8" data-unscoped-search-url="/search" 
+data-scoped-search-url="/StackExchange/dapper-dot-net/search">
+<DIV 
+style="margin: 0px; padding: 0px; display: inline;"><INPUT name="utf8" type="hidden" value="✓"></DIV> 
+    <LABEL class="form-control header-search-wrapper js-chromeless-input-container">
+<DIV class="header-search-scope">This repository</DIV><INPUT name="q" tabindex="1" class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable" aria-label="Search this repository" type="text" placeholder="Search" value="" autocapitalize="off" data-scoped-placeholder="Search" data-unscoped-placeholder="Search GitHub" data-hotkey="s"> 
+    </LABEL> </FORM></DIV></NAV></DIV></DIV></HEADER>
+<DIV class="accessibility-aid" id="start-of-content"></DIV>
+<DIV id="js-flash-container"></DIV>
+<DIV class="main-content" role="main">
+<DIV itemtype="http://schema.org/SoftwareSourceCode" itemscope="">
+<DIV id="js-repo-pjax-container" data-pjax-container="">
+<DIV class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+<DIV class="container repohead-details-container">
+<UL class="pagehead-actions">
+  <LI><A class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to watch a repository" 
+  href="https://github.com/login?return_to=%2FStackExchange%2Fdapper-dot-net" 
+  rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-eye" 
+  aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" 
+  version="1.1"><path d="M 8.06 2 C 3 2 0 8 0 8 s 3 6 8.06 6 c 4.94 0 7.94 -6 7.94 -6 S 13 2 8.06 2 Z m -0.06 10 c -2.2 0 -4 -1.78 -4 -4 c 0 -2.2 1.8 -4 4 -4 c 2.22 0 4 1.8 4 4 c 0 2.22 -1.78 4 -4 4 Z m 2 -4 c 0 1.11 -0.89 2 -2 2 s -2 -0.89 -2 -2 s 0.89 -2 2 -2 s 2 0.89 2 2 Z" 
+  /></svg>    Watch   </A>   <A class="social-count" href="https://github.com/StackExchange/dapper-dot-net/watchers"> 
+     606   </A>   </LI>
+  <LI><A class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to star a repository" 
+  href="https://github.com/login?return_to=%2FStackExchange%2Fdapper-dot-net" 
+  rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-star" 
+  aria-hidden="true" viewBox="0 0 14 16" width="14" height="16" 
+  version="1.1"><path d="M 14 6 l -4.9 -0.64 L 7 1 L 4.9 5.36 L 0 6 l 3.6 3.26 L 2.67 14 l 4.33 -2.33 l 4.33 2.33 L 10.4 9.26 L 14 6 Z" 
+  /></svg>    Star   </A>     <A class="social-count js-social-count" href="https://github.com/StackExchange/dapper-dot-net/stargazers"> 
+       4,273     </A>   </LI>
+  <LI><A class="btn btn-sm btn-with-count tooltipped tooltipped-n" aria-label="You must be signed in to fork a repository" 
+  href="https://github.com/login?return_to=%2FStackExchange%2Fdapper-dot-net" 
+  rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-repo-forked" 
+  aria-hidden="true" viewBox="0 0 10 16" width="10" height="16" 
+  version="1.1"><path d="M 8 1 c -1.11 0 -2 0.89 -2 2 c 0 0.73 0.41 1.38 1 1.72 v 1.28 L 5 8 L 3 6 v -1.28 c 0.59 -0.34 1 -0.98 1 -1.72 c 0 -1.11 -0.89 -2 -2 -2 S 0 1.89 0 3 c 0 0.73 0.41 1.38 1 1.72 v 1.78 l 3 3 v 1.78 c -0.59 0.34 -1 0.98 -1 1.72 c 0 1.11 0.89 2 2 2 s 2 -0.89 2 -2 c 0 -0.73 -0.41 -1.38 -1 -1.72 V 9.5 l 3 -3 V 4.72 c 0.59 -0.34 1 -0.98 1 -1.72 c 0 -1.11 -0.89 -2 -2 -2 Z M 2 4.2 c -0.66 0 -1.2 -0.55 -1.2 -1.2 s 0.55 -1.2 1.2 -1.2 s 1.2 0.55 1.2 1.2 s -0.55 1.2 -1.2 1.2 Z m 3 10 c -0.66 0 -1.2 -0.55 -1.2 -1.2 s 0.55 -1.2 1.2 -1.2 s 1.2 0.55 1.2 1.2 s -0.55 1.2 -1.2 1.2 Z m 3 -10 c -0.66 0 -1.2 -0.55 -1.2 -1.2 s 0.55 -1.2 1.2 -1.2 s 1.2 0.55 1.2 1.2 s -0.55 1.2 -1.2 1.2 Z" 
+  /></svg>        Fork       </A>     <A class="social-count" href="https://github.com/StackExchange/dapper-dot-net/network"> 
+       1,332     </A>   </LI></UL>
+<H1 class="entry-title public "><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-repo" 
+aria-hidden="true" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 4 9 h -1 v -1 h 1 v 1 Z m 0 -3 h -1 v 1 h 1 v -1 Z m 0 -2 h -1 v 1 h 1 v -1 Z m 0 -2 h -1 v 1 h 1 v -1 Z m 8 -1 v 12 c 0 0.55 -0.45 1 -1 1 H 6 v 2 l -1.5 -1.5 l -1.5 1.5 V 14 H 1 c -0.55 0 -1 -0.45 -1 -1 V 1 C 0 0.45 0.45 0 1 0 h 10 c 0.55 0 1 0.45 1 1 Z m -1 10 H 1 v 2 h 2 v -1 h 3 v 1 h 5 V 11 Z m 0 -10 H 2 v 9 h 9 V 1 Z" 
+/></svg>   <SPAN class="author" itemprop="author"><A class="url fn" href="https://github.com/StackExchange" 
+rel="author">StackExchange</A></SPAN><!--
+--><SPAN class="path-divider">/</SPAN><!--
+--><STRONG 
+itemprop="name"><A href="https://github.com/StackExchange/dapper-dot-net" 
+data-pjax="#js-repo-pjax-container">dapper-dot-net</A></STRONG> </H1></DIV>
+<DIV class="container"><NAV class="reponav js-repo-nav js-sidenav-container-pjax" 
+role="navigation" itemtype="http://schema.org/BreadcrumbList" itemscope="" 
+data-pjax="#js-repo-pjax-container"><SPAN itemtype="http://schema.org/ListItem" 
+itemscope="" itemprop="itemListElement"><A class="js-selected-navigation-item selected reponav-item" 
+aria-selected="true" href="https://github.com/StackExchange/dapper-dot-net" 
+data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /StackExchange/dapper-dot-net" 
+data-hotkey="g c" itemprop="url"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-code" 
+aria-hidden="true" viewBox="0 0 14 16" width="14" height="16" 
+version="1.1"><path d="M 9.5 3 l -1.5 1.5 l 3.5 3.5 L 8 11.5 l 1.5 1.5 l 4.5 -5 L 9.5 3 Z M 4.5 3 L 0 8 l 4.5 5 l 1.5 -1.5 L 2.5 8 l 3.5 -3.5 L 4.5 3 Z" 
+/></svg>       <SPAN itemprop="name">Code</SPAN>       
+<META content="1" itemprop="position"> </A>  </SPAN>     <SPAN itemtype="http://schema.org/ListItem" 
+itemscope="" itemprop="itemListElement"><A class="js-selected-navigation-item reponav-item" 
+href="https://github.com/StackExchange/dapper-dot-net/issues" 
+data-selected-links="repo_issues repo_labels repo_milestones /StackExchange/dapper-dot-net/issues" 
+data-hotkey="g i" itemprop="url"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-issue-opened" 
+aria-hidden="true" viewBox="0 0 14 16" width="14" height="16" 
+version="1.1"><path d="M 7 2.3 c 3.14 0 5.7 2.56 5.7 5.7 S 10.14 13.7 7 13.7 S 1.3 11.14 1.3 8 s 2.56 -5.7 5.7 -5.7 m 0 -1.3 C 3.14 1 0 4.14 0 8 s 3.14 7 7 7 s 7 -3.14 7 -7 S 10.86 1 7 1 Z m 1 3 H 6 v 5 h 2 V 4 Z m 0 6 H 6 v 2 h 2 V 10 Z" 
+/></svg>         <SPAN itemprop="name">Issues</SPAN>         <SPAN class="counter">107</SPAN> 
+        
+<META content="2" itemprop="position"> </A>    </SPAN>   <SPAN itemtype="http://schema.org/ListItem" 
+itemscope="" itemprop="itemListElement"><A class="js-selected-navigation-item reponav-item" 
+href="https://github.com/StackExchange/dapper-dot-net/pulls" 
+data-selected-links="repo_pulls /StackExchange/dapper-dot-net/pulls" 
+data-hotkey="g p" itemprop="url"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-git-pull-request" 
+aria-hidden="true" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 11 11.28 c 0 -1.73 0 -6.28 0 -6.28 c -0.03 -0.78 -0.34 -1.47 -0.94 -2.06 s -1.28 -0.91 -2.06 -0.94 c 0 0 -1.02 0 -1 0 V 0 L 4 3 l 3 3 V 4 h 1 c 0.27 0.02 0.48 0.11 0.69 0.31 s 0.3 0.42 0.31 0.69 v 6.28 c -0.59 0.34 -1 0.98 -1 1.72 c 0 1.11 0.89 2 2 2 s 2 -0.89 2 -2 c 0 -0.73 -0.41 -1.38 -1 -1.72 Z m -1 2.92 c -0.66 0 -1.2 -0.55 -1.2 -1.2 s 0.55 -1.2 1.2 -1.2 s 1.2 0.55 1.2 1.2 s -0.55 1.2 -1.2 1.2 Z M 4 3 c 0 -1.11 -0.89 -2 -2 -2 S 0 1.89 0 3 c 0 0.73 0.41 1.38 1 1.72 c 0 1.55 0 5.56 0 6.56 c -0.59 0.34 -1 0.98 -1 1.72 c 0 1.11 0.89 2 2 2 s 2 -0.89 2 -2 c 0 -0.73 -0.41 -1.38 -1 -1.72 V 4.72 c 0.59 -0.34 1 -0.98 1 -1.72 Z m -0.8 10 c 0 0.66 -0.55 1.2 -1.2 1.2 s -1.2 -0.55 -1.2 -1.2 s 0.55 -1.2 1.2 -1.2 s 1.2 0.55 1.2 1.2 Z m -1.2 -8.8 c -0.66 0 -1.2 -0.55 -1.2 -1.2 s 0.55 -1.2 1.2 -1.2 s 1.2 0.55 1.2 1.2 s -0.55 1.2 -1.2 1.2 Z" 
+/></svg>       <SPAN itemprop="name">Pull requests</SPAN>       <SPAN class="counter">9</SPAN> 
+      
+<META content="3" itemprop="position"> </A>  </SPAN>   <A class="js-selected-navigation-item reponav-item" 
+href="https://github.com/StackExchange/dapper-dot-net/pulse" 
+data-selected-links="pulse /StackExchange/dapper-dot-net/pulse"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-pulse" aria-hidden="true" viewBox="0 0 14 16" width="14" 
+height="16" version="1.1"><path d="M 11.5 8 L 8.8 5.4 L 6.6 8.5 L 5.5 1.6 L 2.38 8 H 0 V 10 h 3.6 L 4.5 8.2 l 0.9 5.4 L 9 8.5 l 1.6 1.5 H 14 V 8 H 11.5 Z" 
+/></svg>    Pulse </A>   <A class="js-selected-navigation-item reponav-item" 
+href="https://github.com/StackExchange/dapper-dot-net/graphs" 
+data-selected-links="repo_graphs repo_contributors /StackExchange/dapper-dot-net/graphs"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-graph" aria-hidden="true" 
+viewBox="0 0 16 16" width="16" height="16" version="1.1"><path d="M 16 14 v 1 H 0 V 0 h 1 v 14 h 15 Z m -11 -1 H 3 V 8 h 2 v 5 Z m 4 0 H 7 V 3 h 2 v 10 Z m 4 0 H 11 V 6 h 2 v 7 Z" 
+/></svg>    Graphs </A> </NAV></DIV></DIV>
+<DIV class="container new-discussion-timeline experiment-repo-nav">
+<DIV class="repository-content"><A class="hidden js-permalink-shortcut" href="https://github.com/StackExchange/dapper-dot-net/blob/e894e7e24bfe712958cd054a51d5631361f36857/Dapper.EntityFramework/Handlers.cs" 
+data-hotkey="y">Permalink</A> <!-- blob contrib key: blob_contributors:v21:337c4e89355c4e85907ca2985b9bb4e1 --> 
+<DIV class="file-navigation js-zeroclipboard-container">
+<DIV class="select-menu branch-select-menu js-menu-container js-select-menu left"><BUTTON 
+tabindex="0" title="master" class="btn btn-sm select-menu-button js-menu-target css-truncate" 
+aria-haspopup="true" aria-label="Switch branches or tags" type="button" 
+data-hotkey="w"><I>Branch:</I>     <SPAN class="js-select-button css-truncate-target">master</SPAN> 
+  </BUTTON>   
+<DIV class="select-menu-modal-holder js-menu-content js-navigation-container" 
+aria-hidden="true" data-pjax="">
+<DIV class="select-menu-modal">
+<DIV class="select-menu-header"><svg xmlns="http://www.w3.org/2000/svg" class="octicon octicon-x js-menu-close" 
+role="img" aria-label="Close" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 7.48 8 l 3.75 3.75 l -1.48 1.48 l -3.75 -3.75 l -3.75 3.75 l -1.48 -1.48 l 3.75 -3.75 L 0.77 4.25 l 1.48 -1.48 l 3.75 3.75 l 3.75 -3.75 l 1.48 1.48 l -3.75 3.75 Z" 
+/></svg><SPAN class="select-menu-title">Switch branches/tags</SPAN>       </DIV>
+<DIV class="select-menu-filters">
+<DIV class="select-menu-text-filter"><INPUT class="form-control js-filterable-field js-navigation-enable" id="context-commitish-filter-field" aria-label="Filter branches/tags" type="text" placeholder="Filter branches/tags" value=""></DIV>
+<DIV class="select-menu-tabs">
+<UL>
+  <LI class="select-menu-tab"><A class="js-select-menu-tab" role="tab" href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/Handlers.cs#" 
+  data-filter-placeholder="Filter branches/tags" 
+  data-tab-filter="branches">Branches</A>             </LI>
+  <LI class="select-menu-tab"><A class="js-select-menu-tab" role="tab" href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/Handlers.cs#" 
+  data-filter-placeholder="Find a tag…" data-tab-filter="tags">Tags</A>          
+     </LI></UL></DIV></DIV>
+<DIV class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" 
+role="menu" data-tab-filter="branches">
+<DIV data-filterable-type="substring" data-filterable-for="context-commitish-filter-field"><A 
+class="select-menu-item js-navigation-item js-navigation-open " href="https://github.com/StackExchange/dapper-dot-net/blob/DapperTable/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="DapperTable"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="DapperTable" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               DapperTable               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/IgnoreDuplicatedCols/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="IgnoreDuplicatedCols"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-check select-menu-item-icon" 
+aria-hidden="true" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="IgnoreDuplicatedCols" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               IgnoreDuplicatedCols               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/Issue281/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="Issue281"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="Issue281" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               Issue281               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/QueryFirstOrDefault/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="QueryFirstOrDefault"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-check select-menu-item-icon" 
+aria-hidden="true" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="QueryFirstOrDefault" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               QueryFirstOrDefault               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/TimeSpanParsing/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="TimeSpanParsing"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="TimeSpanParsing" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               TimeSpanParsing               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/UseSingleResultSingleRow/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="UseSingleResultSingleRow"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-check select-menu-item-icon" 
+aria-hidden="true" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="UseSingleResultSingleRow" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               UseSingleResultSingleRow               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/gh-pages/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="gh-pages"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="gh-pages" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               gh-pages               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open selected" 
+href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="master"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="master" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               master               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/blob/netstandard/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="netstandard"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="netstandard" class="select-menu-item-text css-truncate-target js-select-menu-filter-text"> 
+               netstandard               </SPAN></A></DIV>
+<DIV class="select-menu-no-results">Nothing to show</DIV></DIV>
+<DIV class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" 
+data-tab-filter="tags">
+<DIV data-filterable-type="substring" data-filterable-for="context-commitish-filter-field"><A 
+class="select-menu-item js-navigation-item js-navigation-open " href="https://github.com/StackExchange/dapper-dot-net/tree/1.50.0-beta4/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50.0-beta4"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50.0-beta4" class="select-menu-item-text css-truncate-target"> 
+               1.50.0-beta4               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta9/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta9"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta9" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta9               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta8/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta8"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta8" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta8               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta7/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta7"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta7" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta7               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta6/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta6"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta6" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta6               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta5/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta5"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta5" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta5               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta3/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta3"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta3" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta3               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta2/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta2"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta2" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta2               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.50-beta1/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.50-beta1"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.50-beta1" class="select-menu-item-text css-truncate-target"> 
+               1.50-beta1               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.42/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.42"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.42" class="select-menu-item-text css-truncate-target"> 
+               1.42               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.41-beta5/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.41-beta5"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.41-beta5" class="select-menu-item-text css-truncate-target"> 
+               1.41-beta5               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.41-beta4/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.41-beta4"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.41-beta4" class="select-menu-item-text css-truncate-target"> 
+               1.41-beta4               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.41-beta/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.41-beta"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.41-beta" class="select-menu-item-text css-truncate-target"> 
+               1.41-beta               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.41-alpha/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.41-alpha"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.41-alpha" class="select-menu-item-text css-truncate-target"> 
+               1.41-alpha               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.40/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.40"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.40" class="select-menu-item-text css-truncate-target"> 
+               1.40               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.39/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.39"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.39" class="select-menu-item-text css-truncate-target"> 
+               1.39               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.38/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.38"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.38" class="select-menu-item-text css-truncate-target"> 
+               1.38               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.37/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.37"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.37" class="select-menu-item-text css-truncate-target"> 
+               1.37               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.36/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.36"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.36" class="select-menu-item-text css-truncate-target"> 
+               1.36               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.35/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.35"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.35" class="select-menu-item-text css-truncate-target"> 
+               1.35               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.34/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.34"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.34" class="select-menu-item-text css-truncate-target"> 
+               1.34               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.33/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.33"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.33" class="select-menu-item-text css-truncate-target"> 
+               1.33               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.32/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.32"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.32" class="select-menu-item-text css-truncate-target"> 
+               1.32               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.31/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.31"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.31" class="select-menu-item-text css-truncate-target"> 
+               1.31               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.30/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.30"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.30" class="select-menu-item-text css-truncate-target"> 
+               1.30               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.29/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.29"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.29" class="select-menu-item-text css-truncate-target"> 
+               1.29               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.28/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.28"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.28" class="select-menu-item-text css-truncate-target"> 
+               1.28               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.27/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.27"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.27" class="select-menu-item-text css-truncate-target"> 
+               1.27               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.26/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.26"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.26" class="select-menu-item-text css-truncate-target"> 
+               1.26               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.25/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.25"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.25" class="select-menu-item-text css-truncate-target"> 
+               1.25               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.24/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.24"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.24" class="select-menu-item-text css-truncate-target"> 
+               1.24               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.23/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.23"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.23" class="select-menu-item-text css-truncate-target"> 
+               1.23               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.22/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.22"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.22" class="select-menu-item-text css-truncate-target"> 
+               1.22               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.21/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.21"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.21" class="select-menu-item-text css-truncate-target"> 
+               1.21               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.20/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.20"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.20" class="select-menu-item-text css-truncate-target"> 
+               1.20               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.13/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.13"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.13" class="select-menu-item-text css-truncate-target"> 
+               1.13               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.12.1/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.12.1"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.12.1" class="select-menu-item-text css-truncate-target"> 
+               1.12.1               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.12/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.12"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.12" class="select-menu-item-text css-truncate-target"> 
+               1.12               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.11/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.11"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.11" class="select-menu-item-text css-truncate-target"> 
+               1.11               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.10/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.10"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.10" class="select-menu-item-text css-truncate-target"> 
+               1.10               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.9/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.9"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.9" class="select-menu-item-text css-truncate-target"> 
+               1.9               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.8/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.8"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.8" class="select-menu-item-text css-truncate-target"> 
+               1.8               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.6/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.6"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.6" class="select-menu-item-text css-truncate-target"> 
+               1.6               </SPAN></A><A class="select-menu-item js-navigation-item js-navigation-open " 
+href="https://github.com/StackExchange/dapper-dot-net/tree/1.5/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow" data-skip-pjax="true" data-name="1.5"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-check select-menu-item-icon" aria-hidden="true" viewBox="0 0 12 16" 
+width="12" height="16" version="1.1"><path d="M 12 5 L 4 13 L 0 9 l 1.5 -1.5 l 2.5 2.5 l 6.5 -6.5 l 1.5 1.5 Z" 
+/></svg>               <SPAN title="1.5" class="select-menu-item-text css-truncate-target"> 
+               1.5               </SPAN></A></DIV>
+<DIV class="select-menu-no-results">Nothing to 
+show</DIV></DIV></DIV></DIV></DIV>
+<DIV class="btn-group right"><A class="js-pjax-capture-input btn btn-sm" href="https://github.com/StackExchange/dapper-dot-net/find/master" 
+data-hotkey="t" data-pjax="">      Find file     </A>     <BUTTON class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" 
+aria-label="Copy file path to clipboard" type="button" data-copied-hint="Copied!">Copy 
+path</BUTTON>   </DIV>
+<DIV class="breadcrumb js-zeroclipboard-target"><SPAN class="repo-root js-repo-root"><SPAN 
+class="js-path-segment"><A href="https://github.com/StackExchange/dapper-dot-net"><SPAN>dapper-dot-net</SPAN></A></SPAN></SPAN><SPAN 
+class="separator">/</SPAN><SPAN class="js-path-segment"><A href="https://github.com/StackExchange/dapper-dot-net/tree/master/Dapper.EntityFramework"><SPAN>Dapper.EntityFramework</SPAN></A></SPAN><SPAN 
+class="separator">/</SPAN><STRONG class="final-path">Handlers.cs</STRONG>   
+</DIV></DIV>
+<DIV class="commit-tease"><SPAN class="right"><A class="commit-tease-sha" href="https://github.com/StackExchange/dapper-dot-net/commit/fd10fe7ccbb5cd774a489c6cacea82b38d48c8f0" 
+data-pjax="">          fd10fe7         </A>         <relative-time datetime="2015-11-22T22:56:33Z">Nov 
+22, 2015</relative-time>       </SPAN>       
+<DIV><IMG width="20" height="20" class="avatar" alt="@NickCraver" src="gh_files/454813.jpg"> 
+        <A class="user-mention" href="https://github.com/NickCraver" rel="contributor">NickCraver</A> 
+          <A title="A full CoreCLR/DNX friendly conversion&#10;&#10;This eliminates the dual solutions and brings Contrib into the&#10;project.json fold.&#10;- Tests are ported to xUnit though SQLite is disabled on DNX due to&#10;Issue #375 (Interop loads fail in the VS runner and  params are busted&#10;regardless).&#10;- Projects are consolidated down to what's currently possible with&#10;project.json.&#10;- Contrib moved to: Dapper.Contrib and Dapper.Tests.Contrib (so tests&#10;appear at the end, no other reason vs. Dapper.Contrib.Tests)&#10;- EF moved to: Dapper.EntityFramework(.StrongName)&#10;- Rainbow moved to: Dapper.Rainbow&#10;- SqlBuilder moved to: Dapper.SqlBuilder&#10;- Packages are removed since it's not current-tooling friendly to keep&#10;them (nor was it using them).&#10;- xUnit implemented in Contrib via abstracts - this allow us to very&#10;quickly add any database provider to the rig in a very concise way.&#10;- Contrib unit tests fixed in various places - they were not&#10;parallel-runner friendly&#10;- Nuspecs removed, since they aren't used anymore (to eliminate&#10;confusion)&#10;- Removed speed tests for libraries that aren't on current versions of&#10;.Net (what would we be comparing?)&#10;- Perf tests moved to Dapper.Tests (consolidation from&#10;Dapper.DNX.Tests), but aren't activated yet (no define)" 
+class="message" href="https://github.com/StackExchange/dapper-dot-net/commit/fd10fe7ccbb5cd774a489c6cacea82b38d48c8f0" 
+data-pjax="true">A full CoreCLR/DNX friendly conversion</A>       </DIV>
+<DIV class="commit-tease-contributors"><BUTTON class="btn-link muted-link contributors-toggle" 
+type="button" data-facebox="#blob_contributors_box"><STRONG>1</STRONG>         
+contributor       </BUTTON>           </DIV>
+<DIV id="blob_contributors_box" style="display: none;">
+<H2 class="facebox-header" data-facebox-id="facebox-header">Users who have 
+contributed to this file</H2>
+<UL class="facebox-user-list" data-facebox-id="facebox-description">
+  <LI class="facebox-user-list-item"><IMG width="24" height="24" alt="@NickCraver" 
+  src="gh_files/454813(1).jpg">             <A href="https://github.com/NickCraver">NickCraver</A> 
+            </LI></UL></DIV></DIV>
+<DIV class="file">
+<DIV class="file-header">
+<DIV class="file-actions">
+<DIV class="btn-group"><A class="btn btn-sm " id="raw-url" href="https://github.com/StackExchange/dapper-dot-net/raw/master/Dapper.EntityFramework/Handlers.cs">Raw</A> 
+        <A class="btn btn-sm js-update-url-with-hash" href="https://github.com/StackExchange/dapper-dot-net/blame/master/Dapper.EntityFramework/Handlers.cs">Blame</A> 
+      <A class="btn btn-sm " href="https://github.com/StackExchange/dapper-dot-net/commits/master/Dapper.EntityFramework/Handlers.cs" 
+rel="nofollow">History</A>     </DIV><A class="btn-octicon tooltipped tooltipped-nw" 
+aria-label="Open this file in GitHub Desktop" href="https://windows.github.com/" 
+data-ga-click="Repository, open with desktop, type:windows"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-device-desktop" aria-hidden="true" viewBox="0 0 16 16" 
+width="16" height="16" version="1.1"><path d="M 15 2 H 1 c -0.55 0 -1 0.45 -1 1 v 9 c 0 0.55 0.45 1 1 1 h 5.34 c -0.25 0.61 -0.86 1.39 -2.34 2 h 8 c -1.48 -0.61 -2.09 -1.39 -2.34 -2 h 5.34 c 0.55 0 1 -0.45 1 -1 V 3 c 0 -0.55 -0.45 -1 -1 -1 Z m 0 9 H 1 V 3 h 14 v 8 Z" 
+/></svg>         </A>         <BUTTON class="btn-octicon disabled tooltipped tooltipped-nw" 
+aria-label="You must be signed in to make or propose changes" type="button"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-pencil" aria-hidden="true" 
+viewBox="0 0 14 16" width="14" height="16" version="1.1"><path d="M 0 12 v 3 h 3 l 8 -8 l -3 -3 L 0 12 Z m 3 2 H 1 V 12 h 1 v 1 h 1 v 1 Z m 10.3 -9.3 l -1.3 1.3 l -3 -3 l 1.3 -1.3 c 0.39 -0.39 1.02 -0.39 1.41 0 l 1.59 1.59 c 0.39 0.39 0.39 1.02 0 1.41 Z" 
+/></svg>         </BUTTON>         <BUTTON class="btn-octicon btn-octicon-danger disabled tooltipped tooltipped-nw" 
+aria-label="You must be signed in to make or propose changes" type="button"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-trashcan" 
+aria-hidden="true" viewBox="0 0 12 16" width="12" height="16" 
+version="1.1"><path d="M 10 2 H 8 c 0 -0.55 -0.45 -1 -1 -1 H 4 c -0.55 0 -1 0.45 -1 1 H 1 c -0.55 0 -1 0.45 -1 1 v 1 c 0 0.55 0.45 1 1 1 v 9 c 0 0.55 0.45 1 1 1 h 7 c 0.55 0 1 -0.45 1 -1 V 5 c 0.55 0 1 -0.45 1 -1 v -1 c 0 -0.55 -0.45 -1 -1 -1 Z m -1 12 H 2 V 5 h 1 v 8 h 1 V 5 h 1 v 8 h 1 V 5 h 1 v 8 h 1 V 5 h 1 v 9 Z m 1 -10 H 1 v -1 h 9 v 1 Z" 
+/></svg>         </BUTTON>   </DIV>
+<DIV class="file-info">      18 lines (17 sloc)       <SPAN class="file-info-divider"></SPAN> 
+   488 Bytes   </DIV></DIV>
+<DIV class="blob-wrapper data type-c" itemprop="text">
+<TABLE class="highlight tab-size js-file-line-container" data-tab-size="8">
+  <TBODY>
+  <TR>
+    <TD class="blob-num js-line-number" id="L1" data-line-number="1"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC1"><SPAN class="pl-k">namespace</SPAN> <SPAN class="pl-en">Dapper.EntityFramework</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L2" data-line-number="2"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC2">{</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L3" data-line-number="3"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC3">    <SPAN class="pl-c">/// &lt;<SPAN class="pl-ent">summary</SPAN>&gt;</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L4" data-line-number="4"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC4">    <SPAN class="pl-c">/// Acts on behalf of all type-handlers in this package</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L5" data-line-number="5"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC5">    <SPAN class="pl-c">/// &lt;/<SPAN class="pl-ent">summary</SPAN>&gt;</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L6" data-line-number="6"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC6">    <SPAN class="pl-k">public</SPAN> <SPAN class="pl-k">static</SPAN> <SPAN class="pl-k">class</SPAN> <SPAN class="pl-en">Handlers</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L7" data-line-number="7"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC7">    {</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L8" data-line-number="8"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC8">        <SPAN class="pl-c">/// &lt;<SPAN class="pl-ent">summary</SPAN>&gt;</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L9" data-line-number="9"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC9">        <SPAN class="pl-c">/// Register all type-handlers in this package</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L10" data-line-number="10"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC10">        <SPAN class="pl-c">/// &lt;/<SPAN class="pl-ent">summary</SPAN>&gt;</SPAN></TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L11" data-line-number="11"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC11">        <SPAN class="pl-k">public</SPAN> <SPAN class="pl-k">static</SPAN> <SPAN class="pl-k">void</SPAN> <SPAN class="pl-en">Register</SPAN>()</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L12" data-line-number="12"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC12">        {</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L13" data-line-number="13"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC13">            SqlMapper.AddTypeHandler(DbGeographyHandler.Default);</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L14" data-line-number="14"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC14">            SqlMapper.AddTypeHandler(DbGeometryHandler.Default);</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L15" data-line-number="15"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC15">        }</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L16" data-line-number="16"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC16">    }</TD></TR>
+  <TR>
+    <TD class="blob-num js-line-number" id="L17" data-line-number="17"></TD>
+<TD class="blob-code blob-code-inner js-file-line" id="LC17">}</TD></TR></TBODY></TABLE></DIV></DIV><BUTTON 
+class="hidden" type="button" data-hotkey="l" data-facebox="#jump-to-line" 
+data-facebox-class="linejump">Jump to Line</BUTTON> 
+<DIV id="jump-to-line" style="display: none;"><!-- </textarea> --><!-- '"` -->
+<FORM class="js-jump-to-line-form" action="" method="get" 
+accept-charset="UTF-8">
+<DIV 
+style="margin: 0px; padding: 0px; display: inline;"><INPUT name="utf8" type="hidden" value="✓"></DIV> 
+    <INPUT class="form-control linejump-input js-jump-to-line-field" autofocus="" aria-label="Jump to line" type="text" placeholder="Jump to line…" value=""> 
+    <BUTTON class="btn" type="submit">Go</BUTTON> </FORM></DIV></DIV>
+<DIV class="modal-backdrop"></DIV></DIV></DIV></DIV></DIV>
+<DIV class="container site-footer-container">
+<DIV class="site-footer" role="contentinfo">
+<UL class="site-footer-links right">
+  <LI><A href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</A></LI>
+  <LI><A href="https://developer.github.com/" data-ga-click="Footer, go to api, text:api">API</A></LI>
+  <LI><A href="https://training.github.com/" data-ga-click="Footer, go to training, text:training">Training</A></LI>
+  <LI><A href="https://shop.github.com/" data-ga-click="Footer, go to shop, text:shop">Shop</A></LI>
+  <LI><A href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</A></LI>
+  <LI><A href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</A></LI></UL><A 
+title="GitHub" class="site-footer-mark" aria-label="Homepage" href="https://github.com/"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-mark-github" 
+aria-hidden="true" viewBox="0 0 16 16" width="24" height="24" 
+version="1.1"><path d="M 8 0 C 3.58 0 0 3.58 0 8 c 0 3.54 2.29 6.53 5.47 7.59 c 0.4 0.07 0.55 -0.17 0.55 -0.38 c 0 -0.19 -0.01 -0.82 -0.01 -1.49 c -2.01 0.37 -2.53 -0.49 -2.69 -0.94 c -0.09 -0.23 -0.48 -0.94 -0.82 -1.13 c -0.28 -0.15 -0.68 -0.52 -0.01 -0.53 c 0.63 -0.01 1.08 0.58 1.23 0.82 c 0.72 1.21 1.87 0.87 2.33 0.66 c 0.07 -0.52 0.28 -0.87 0.51 -1.07 c -1.78 -0.2 -3.64 -0.89 -3.64 -3.95 c 0 -0.87 0.31 -1.59 0.82 -2.15 c -0.08 -0.2 -0.36 -1.02 0.08 -2.12 c 0 0 0.67 -0.21 2.2 0.82 c 0.64 -0.18 1.32 -0.27 2 -0.27 c 0.68 0 1.36 0.09 2 0.27 c 1.53 -1.04 2.2 -0.82 2.2 -0.82 c 0.44 1.1 0.16 1.92 0.08 2.12 c 0.51 0.56 0.82 1.27 0.82 2.15 c 0 3.07 -1.87 3.75 -3.65 3.95 c 0.29 0.25 0.54 0.73 0.54 1.48 c 0 1.07 -0.01 1.93 -0.01 2.2 c 0 0.21 0.15 0.46 0.55 0.38 C 13.71 14.53 16 11.53 16 8 C 16 3.58 12.42 0 8 0 Z" 
+/></svg> </A>     
+<UL class="site-footer-links">
+  <LI>© 2016 <SPAN 
+  title="0.05116s from github-fe137-cp1-prd.iad.github.net">GitHub</SPAN>, 
+  Inc.</LI>
+  <LI><A href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</A></LI>
+  <LI><A href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</A></LI>
+  <LI><A href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</A></LI>
+  <LI><A href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</A></LI>
+  <LI><A href="https://help.github.com/" data-ga-click="Footer, go to help, text:help">Help</A></LI></UL></DIV></DIV>
+<DIV class="ajax-error-message flash flash-error" id="ajax-error-message"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-alert" aria-hidden="true" 
+viewBox="0 0 16 16" width="16" height="16" version="1.1"><path d="M 15.72 12.5 l -6.85 -11.98 C 8.69 0.21 8.36 0.02 8 0.02 s -0.69 0.19 -0.87 0.5 l -6.85 11.98 c -0.18 0.31 -0.18 0.69 0 1 C 0.47 13.81 0.8 14 1.15 14 h 13.7 c 0.36 0 0.69 -0.19 0.86 -0.5 S 15.89 12.81 15.72 12.5 Z M 9 12 H 7 V 10 h 2 V 12 Z M 9 9 H 7 V 5 h 2 V 9 Z" 
+/></svg>       <BUTTON class="flash-close js-flash-close js-ajax-error-dismiss" 
+aria-label="Dismiss error" type="button"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-x" aria-hidden="true" viewBox="0 0 12 16" width="12" 
+height="16" version="1.1"><path d="M 7.48 8 l 3.75 3.75 l -1.48 1.48 l -3.75 -3.75 l -3.75 3.75 l -1.48 -1.48 l 3.75 -3.75 L 0.77 4.25 l 1.48 -1.48 l 3.75 3.75 l 3.75 -3.75 l 1.48 1.48 l -3.75 3.75 Z" 
+/></svg>       </BUTTON>      Something went wrong with that request. Please try 
+again.     </DIV>
+<SCRIPT src="gh_files/compat-7db58f8b7b91111107fac755dd8b178fe7db0f209ced51fc339c446ad3f8da2b.js" crossorigin="anonymous"></SCRIPT>
+       
+<SCRIPT src="gh_files/frameworks-851de55546d87ad786f3efef3b5634f8f8a40d67fa6d44f854d9e99767e9c9a2.js" crossorigin="anonymous"></SCRIPT>
+       
+<SCRIPT src="gh_files/github-9a6de3c5d3dd93cd9d6638a6d1bcc27eb7cbf9afdd082771ea900f9996597a24.js" async="async" crossorigin="anonymous"></SCRIPT>
+                                         
+<DIV class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden"><svg 
+xmlns="http://www.w3.org/2000/svg" class="octicon octicon-alert" aria-hidden="true" 
+viewBox="0 0 16 16" width="16" height="16" version="1.1"><path d="M 15.72 12.5 l -6.85 -11.98 C 8.69 0.21 8.36 0.02 8 0.02 s -0.69 0.19 -0.87 0.5 l -6.85 11.98 c -0.18 0.31 -0.18 0.69 0 1 C 0.47 13.81 0.8 14 1.15 14 h 13.7 c 0.36 0 0.69 -0.19 0.86 -0.5 S 15.89 12.81 15.72 12.5 Z M 9 12 H 7 V 10 h 2 V 12 Z M 9 9 H 7 V 5 h 2 V 9 Z" 
+/></svg>       <SPAN class="signed-in-tab-flash">You signed in with another tab 
+or window. <A href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/">Reload</A> 
+to refresh your session.</SPAN>       <SPAN class="signed-out-tab-flash">You 
+signed out in another tab or window. <A href="https://github.com/StackExchange/dapper-dot-net/blob/master/Dapper.EntityFramework/">Reload</A> 
+to refresh your session.</SPAN>     </DIV>
+<DIV class="facebox" id="facebox" style="display: none;">
+<DIV class="facebox-popup">
+<DIV class="facebox-content" role="dialog" aria-describedby="facebox-description" 
+aria-labelledby="facebox-header"></DIV><BUTTON class="facebox-close js-facebox-close" 
+aria-label="Close modal" type="button"><svg xmlns="http://www.w3.org/2000/svg" 
+class="octicon octicon-x" aria-hidden="true" viewBox="0 0 12 16" width="12" 
+height="16" version="1.1"><path d="M 7.48 8 l 3.75 3.75 l -1.48 1.48 l -3.75 -3.75 l -3.75 3.75 l -1.48 -1.48 l 3.75 -3.75 L 0.77 4.25 l 1.48 -1.48 l 3.75 3.75 l 3.75 -3.75 l 1.48 1.48 l -3.75 3.75 Z" 
+/></svg>     </BUTTON>   </DIV></DIV></BODY></HTML>
