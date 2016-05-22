@@ -17,7 +17,7 @@
     {
       "matches": ["https://github.com/*"],
       "css": ["github.css"],
-      "js": ["jquery-1.12.3.min.js","github-ext.js"]
+      "js": ["jquery-1.12.3.min.js","Common.js","IGitComment.js","GitHubComment.js","github-ext.js"]
     }
   ]
 }
