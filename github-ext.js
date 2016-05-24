@@ -38,8 +38,6 @@ function Review(){
 			line:$(this)
 		});		
 	},function(){
-		self.hideMenu({
-			line:$(this)
-		});
+		
 	});
 }

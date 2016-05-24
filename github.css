@@ -1,3 +1,16 @@
 .blob-num:after{
 	
 }
+.addbutton{
+	       position: relative;
+    display: inline-block;
+    z-index: 1000000;
+    background: bisque;
+        top: 0;
+    
+   
+    left: -5px;
+}
+table.js-file-line-container > tbody > tr{
+	position:relative;
+}
