@@ -1,5 +1,5 @@
 
-var IGitComment = function() {
+var IGitComment = function(data) {
 	var self = this;
     if (this.constructor === IGitComment) {
       throw new Error("Can't instantiate abstract class!");
@@ -12,7 +12,11 @@ var IGitComment = function() {
 										  "<input id='comment-content' type='text'/> "+
 										  "<button id='cancel'>cancel</button>"+
 										  "<button id='savecomment'>save</button>"+
-										  "</div>"
+										  "</div>";
+	self.CommentedLayout = "<div class='comment' style='display: block;height: 20px;border: 1px dashed #6cc644;background-color: rgba(108, 198, 68, 0.22);'>{0}</div>";
+
+	self.lineContent = data;
+		self.IsRenderForm = false;									  
 };
 
 /**
@@ -28,12 +32,15 @@ IGitComment.prototype.SaveAction = function(){
 	
 	$('#savecomment').on('click',function(){
 	
-		var obj = {content:$('#comment-content').val(),
-								linenum:self.CurrentLineNumber,
+		var obj = {comments:$('#comment-content').val(),
+								line:self.CurrentLineNumber,
 								page: self.GetUrl()
 							}
 			console.log(obj);
-		
+			$('.comment').remove();
+		self.lineContent.push(obj);
+		 self.renderComment(self.lineContent);
+		self.RemoveFormComment();
 	});
 }
 IGitComment.prototype.CancelAction = function(){
@@ -43,6 +50,9 @@ IGitComment.prototype.CancelAction = function(){
 });
 }
 IGitComment.prototype.RemoveFormComment =function(){
+	var self = this;
+	 	self.lineElement.find('.addbutton').remove();
+		self.IsRenderForm = false;
 		$('#commentform').remove();
 }
 IGitComment.prototype.InitFormComment = function(){

@@ -1,5 +1,5 @@
-var GitHubComment = function() {
-    IGitComment.apply(this, arguments);
+var GitHubComment = function(data) {
+    IGitComment.apply(this, [data]);
 };
 GitHubComment.prototype = Object.create(IGitComment.prototype);
 GitHubComment.prototype.constructor = GitHubComment;
@@ -18,16 +18,19 @@ GitHubComment.prototype.setUpAdd = function(){
 GitHubComment.prototype.GetUrl = function(){
 		var currentUrl =window.location.href;
 	var position =  currentUrl.lastIndexOf('#L') != -1 ? currentUrl.lastIndexOf('#L'):0;
-	console.log( currentUrl.lastIndexOf('#L'));
 	 var url = currentUrl.substr(0, position);
 	 return url;
 }
 GitHubComment.prototype.render = function() {
+
    var self = this;
+   self.renderComment(self.lineContent);
    var linenumelement = $('.blob-num');
    var tablerow = $('table.js-file-line-container>tbody>tr');
 
    tablerow.hover(function(){
+   	if(self.IsRenderForm )
+   		return;
    	var row = $(this);
    	self.CurrentRow = row;
    var line =	$(row.find('td.blob-num.js-line-number'));
@@ -37,24 +40,38 @@ GitHubComment.prototype.render = function() {
    linecontent.prepend(String.format(self.AddButton,line.attr('data-line-number')));
    self.setUpAdd();
    },function(){
+   	if(self.IsRenderForm)
+   		return;
    	if(!self.lineElement){
  			var row = $(this);
   	  self.lineElement =	$(row.find('td.blob-num.js-line-number'));
    	}
-self.IsRenderForm = false;
+
    	self.lineElement.find('.addbutton').remove();
-   	self.RemoveFormComment();
+   	//self.RemoveFormComment();
    });
 
-  /* linenumelement.each(function(element) {
-   //	console.log(element);
-   	var jElement = $(this);
-   jElement.append(String.format(self.AddButton,jElement.attr('data-line-number')));
- });*/
+ 
 }
-
+GitHubComment.prototype.renderComment = function(data){
+	var self = this;
+	data.forEach(function(comment) {
+		var prefix='#LC';
+		 var linecontent = $(prefix+comment.line);
+		var contentElement = String.format(self.CommentedLayout,comment.comments);
+		linecontent.append(contentElement);
+	});
+}
 $(function(){
-	var gitComment = new GitHubComment();
+	var data=[
+	{
+		line:16,
+		comments:'Hello world'
+	},{
+			line:1,
+		comments:'Hello world'
+	}];
+	var gitComment = new GitHubComment(data);
 
 	gitComment.render();
 });
